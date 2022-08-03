@@ -4,14 +4,14 @@ const axios = require('axios');
 
 {/* Declarar variables */}
 
-const LogIn = () => {
+const LogIn = ({navigation}) => {
   const [gmailApp, onChangeGmail] = React.useState("");
   const [passwordApp, onChangePassword] = React.useState("");
 
 {/* Guardar datos en la BD*/}
   const validar = () =>{
     if(!gmailApp){
-        console.log("Inrese un Mail")
+        console.log("Ingrese un Mail")
         return 0
     } 
     if(!passwordApp){

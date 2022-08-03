@@ -1,40 +1,22 @@
-import { Button,StyleSheet, View,TouchableOpacity } from "react-native";
+import { get } from "react-hook-form";
+import { Button,StyleSheet, View,Text } from "react-native";
+import React from "react";
+const axios = require('axios');
 
 const HomeScreen = ({ navigation }) => {
+    const [platosApp, onChangePlatos] = React.useState("");
+        axios.get('https://api.spoonacular.com/recipes/complexSearch?apiKey=a4a2c21672f84a8dbd45a0c5ac307c13')
+        .then(function (response) {
+            console.log(response);
+            onChangePlatos(response)
+        })
+        .catch(function (error) {
+            console.log('NO SE HAN TRAIDO LOS PLATOS');
+            console.log(error);
+        }); 
     return (
-        <View style={[styles.body, {
-            flexDirection: "collumn"
-        }]}>
-            <View style={{ flex: 1}}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('IngresoPrenda')}
-                    style={styles.roundButton2}>Ingresar prenda
-                </TouchableOpacity>
-            </View>
-            <View style={{ flex: 1}}>
-                <View style={[styles.body, {
-                    flexDirection: "row"
-                }]}>
-                    <View style={{ flex: 2 }}>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('IngresoPrenda')}
-                            style={styles.roundButton3}>Crear outfit
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 2 }}>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('IngresoPrenda')}
-                            style={styles.roundButton4}>Armario
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-            <View style={{ flex: 1}}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('IngresoPrenda')}
-                    style={styles.roundButton5}>Calendario
-                </TouchableOpacity>
-            </View>
+        <View>
+            <Text value={platosApp}> </Text>
         </View>
     );
     };
