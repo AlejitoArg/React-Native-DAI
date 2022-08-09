@@ -10,12 +10,12 @@ const LogIn = ({navigation}) => {
 
 {/* Guardar datos en la BD*/}
   const validar = () =>{
-    if(!gmailApp){
-        console.log("Ingrese un Mail")
+    if(gmailApp!="challenge@alkemy.org"){
+        console.log("El mail es incorrecto")
         return 0
     } 
-    if(!passwordApp){
-        console.log("Ingrese una contraseña")
+    if(passwordApp!="react"){
+        console.log("La contraseña es incorrecta")
         return 0
     } 
     navigation.navigate('Home')
