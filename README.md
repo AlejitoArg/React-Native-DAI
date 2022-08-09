@@ -4,7 +4,7 @@ path=%PATH%;%USERPROFILE%\AppData\Roaming\npm
 
 npm install -g expo-cli
 
-npm audit fix
+npm audit fix --force
 
 expo start
 
