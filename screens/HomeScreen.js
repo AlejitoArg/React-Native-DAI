@@ -1,42 +1,46 @@
 import { StyleSheet, View,Text } from "react-native";
 import React from "react";
+import Plato from "../components/Plato"
 const axios = require('axios');
 
 const HomeScreen = ({ navigation }) => {
     const [platosApp, onChangePlatos] = React.useState("");
     const [tokenApp, onChangeToken] = React.useState("");
-    const obj = {
-            "email": "challenge@alkemy.org",
-            "password": "react"
-        }
-    axios.post('http://challenge-react.alkemy.org', obj)
-    .then(function (response) {
-        console.log(response.data.token);
-        onChangeToken(response.data.token)
-    })
-    .catch(function (error) {
-        console.log('NO SE HAN TRAIDO LOS PLATOS');
-        console.log(error);
-    });
-
-
-
-    axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${tokenApp}`)
-    .then(function (response) {
-        console.log(response);
-        onChangePlatos(response)
-    })
-    .catch(function (error) {
-        console.log('NO SE HAN TRAIDO LOS PLATOS');
-        console.log(error);
-    });
+    React.useEffect(() => {
+        const obj = {
+                "email": "challenge@alkemy.org",
+                "password": "react"
+            }
+        axios.post('http://challenge-react.alkemy.org', obj)
+        .then(function (response) {
+            console.log(response.data.token);
+            onChangeToken(response.data.token)
+        })
+        .catch(function (error) {
+            console.log('NO SE HAN TRAIDO LOS PLATOS');
+            console.log(error);
+        });
+        axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=a4a2c21672f84a8dbd45a0c5ac307c13`)
+        .then(function (response) {
+            console.log(response);
+            onChangePlatos(response)
+        })
+        .catch(function (error) {
+            console.log('NO SE HAN TRAIDO LOS PLATOS');
+            console.log(error);
+        });
+    },[])
 
     return (
-        <View>
-            <Text value={platosApp}> </Text>
-        </View>
+        {
+            platosApp.map(
+                (i)=>(
+                    <Plato id={i.title} imagen={i.image}/>
+                )
+            )
+        }
     );
-    };
+};
 
     const styles = StyleSheet.create({
         body: {
