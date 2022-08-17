@@ -2,9 +2,10 @@ import { StyleSheet, View,Text } from "react-native";
 import React from "react";
 import Plato from "../components/Plato"
 const axios = require('axios');
+import {useContextState } from "../contextState";
 
 const HomeScreen = ({ navigation }) => {
-    const [platosApp, onChangePlatos] = React.useState("");
+    const [platosApp, onChangePlatos] = React.useState([]);
     const [tokenApp, onChangeToken] = React.useState("");
     React.useEffect(() => {
         const obj = {
@@ -22,8 +23,8 @@ const HomeScreen = ({ navigation }) => {
         });
         axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=a4a2c21672f84a8dbd45a0c5ac307c13`)
         .then(function (response) {
-            console.log(response);
-            onChangePlatos(response)
+            console.log(response.data.results);
+            onChangePlatos(response.data.results)
         })
         .catch(function (error) {
             console.log('NO SE HAN TRAIDO LOS PLATOS');
@@ -32,13 +33,15 @@ const HomeScreen = ({ navigation }) => {
     },[])
 
     return (
-        {
-            platosApp.map(
-                (i)=>(
-                    <Plato id={i.title} imagen={i.image}/>
+        <>
+            {
+                platosApp.map(
+                    (plato)=>(
+                        <Plato nombre={plato.title} imagen={plato.image}/>
+                    )
                 )
-            )
-        }
+            }
+        </>
     );
 };
 

@@ -1,25 +1,51 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import { SafeAreaView, StyleSheet, TextInput,Button,Alert, Picker, Text, View} from "react-native";
+import { ActionTypes, useContextState } from "../contextState";
 const axios = require('axios');
 
 {/* Declarar variables */}
 
 const LogIn = ({navigation}) => {
-  const [gmailApp, onChangeGmail] = React.useState("");
-  const [passwordApp, onChangePassword] = React.useState("");
+  const [gmailApp, onChangeGmail] = useState("");
+  const [passwordApp, onChangePassword] = useState("");
+  const { contextState, setContextState } = useContextState();
 
 {/* Guardar datos en la BD*/}
   const validar = () =>{
-    if(gmailApp!="challenge@alkemy.org"){
-        console.log("El mail es incorrecto")
-        return 0
-    } 
-    if(passwordApp!="react"){
-        console.log("La contraseña es incorrecta")
-        return 0
-    } 
-    navigation.navigate('Home')
-    }
+      if(gmailApp!="challenge@alkemy.org"){
+          console.log("El mail es incorrecto")
+          return 0
+      } 
+      if(passwordApp!="react"){
+          console.log("La contraseña es incorrecta")
+          return 0
+      }
+      let obj = {
+        email:gmailApp,
+        password:passwordApp
+      }
+      axios.post('http://challenge-react.alkemy.org', obj)
+      .then(function (response) {
+        console.log("nashe")
+        setContextState({
+          type: ActionTypes.SetGmail,
+          value: gmailApp
+        })
+        setContextState({
+          type: ActionTypes.SetPassword,
+          value: passwordApp
+        })
+        setContextState({
+          type: ActionTypes.SetToken,
+          value: response
+        })
+      })
+      .catch(function (error) {
+        console.log('NO SE HAN TRAIDO LOS PLATOS');
+        console.log(error);
+      });
+      navigation.navigate('Home')
+  }
 
   {/* Devolver lo que se muestra (frontend) */}
   

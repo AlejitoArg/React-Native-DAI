@@ -1,9 +1,12 @@
 import * as React from 'react';
 import MyStack from './screens/navigation';
+import {ContextProvider } from "./contextState"
 
 const App = () => {
     return (
-            <MyStack></MyStack>
+        <ContextProvider>
+            <MyStack/>
+        </ContextProvider>
     );
 };
 
