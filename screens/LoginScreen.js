@@ -6,8 +6,8 @@ const axios = require('axios');
 {/* Declarar variables */}
 
 const LogIn = ({navigation}) => {
-  const [gmailApp, onChangeGmail] = useState("");
-  const [passwordApp, onChangePassword] = useState("");
+  const [gmailApp, onChangeGmail] = useState("challenge@alkemy.org");
+  const [passwordApp, onChangePassword] = useState("react");
   const { contextState, setContextState } = useContextState();
 
 {/* Guardar datos en la BD*/}
