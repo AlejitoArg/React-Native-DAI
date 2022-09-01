@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen.js';
 import HomeScreen from './HomeScreen.js';
-import IngresoPrenda from './ingresoPrenda.js';
+import PlatosScreen from './PlatosScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +20,8 @@ export default function MyStack(){
             component={HomeScreen}
         />
         <Stack.Screen
-            name="IngresoPrenda"
-            component={IngresoPrenda}
+            name="PlatosScreen"
+            component={PlatosScreen}
         />
         </Stack.Navigator>
     </NavigationContainer>

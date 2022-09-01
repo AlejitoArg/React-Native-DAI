@@ -43,13 +43,15 @@ const HomeScreen = ({ navigation }) => {
             })
         )
     },[])
-
+    
     return (
         <ScrollView>
             {
                 platosApp.map(
                     (plato)=>(
-                        <Plato nombre={plato?.title} imagen={plato?.image} desc={plato?.desc}/>
+                        <View>
+                            <Plato nombre={plato?.title} imagen={plato?.image} desc={plato?.desc}/>
+                        </View>
                     )
                 )
             }
