@@ -1,10 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
+import { ActionTypes, useContextState } from "../contextState";
 import { View, Image, StyleSheet, Text } from 'react-native';
 import { Button } from "react-native-web";
 const axios = require('axios');
 
 const Plato = (props) => {
+    const { contextState, setContextState } = useContextState();
+    const guardar = () =>{
+        setContextState({
+            type: ActionTypes.AddMenu,
+            value: props
+          })
+        console.log(contextState)
+    }
     const styles = StyleSheet.create({
         platoImagen: {
             width: 100,
@@ -38,7 +47,7 @@ const Plato = (props) => {
                 <Text style={styles.title}>{props?.nombre}</Text>
                 <Text>{props?.desc}</Text>
                 <Button
-                    onPress={() => console.log(props)}
+                    onPress={guardar}
                     title="Ver Más"
                     color="#655ea3"
                     style={styles.boton}

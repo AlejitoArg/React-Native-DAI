@@ -26,7 +26,6 @@ const LogIn = ({navigation}) => {
       }
       axios.post('http://challenge-react.alkemy.org', obj)
       .then(function (response) {
-        console.log("nashe")
         setContextState({
           type: ActionTypes.SetGmail,
           value: gmailApp
@@ -48,7 +47,6 @@ const LogIn = ({navigation}) => {
   }
 
   {/* Devolver lo que se muestra (frontend) */}
-  
   return (
     <SafeAreaView style={styles.body}>
       <Text style={styles.Titulo}>Log In</Text>

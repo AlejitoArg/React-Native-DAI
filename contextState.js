@@ -3,13 +3,16 @@ import React, { useContext } from "react"
 export const initialState = {
     gmail: "",
     password: "",
-    token: ""
+    token: "",
+    menu: []
 }
 
 export const ActionTypes = {
     SetGmail: "SET_GMAIL",
     SetPassword: "SET_PASSWORD",
-    SetToken: "SET_TOKEN"
+    SetToken: "SET_TOKEN",
+    AddMenu: "ADD_MENU",
+    DeleteMenu: "DELETE_MENU"
 }
 
 export const reducer = (state = {}, action) => {
@@ -29,6 +32,16 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 token: action.value,
             }
+        case ActionTypes.AddMenu:
+            return {
+                ...state,
+                menu: state.menu.push(action.value)
+            }
+        case ActionTypes.DeleteMenu:
+                return {
+                    ...state,
+                    menu: state.menu.filter(a => a!=action.value)
+                }
         default:
             return state;
     }
