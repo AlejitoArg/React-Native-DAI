@@ -1,16 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { ActionTypes, useContextState } from "../contextState";
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { Button } from "react-native-web";
+import { View, Image, StyleSheet, Text, Button } from 'react-native';
 const axios = require('axios');
 
 const Plato = (props) => {
     const { contextState, setContextState } = useContextState();
     const guardar = () =>{
         setContextState({
-            type: ActionTypes.AddMenu,
-            value: props
+            type: ActionTypes.SetMenu,
+            value: contextState.menu.push(props)
           })
         console.log(contextState)
     }

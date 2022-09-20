@@ -11,8 +11,7 @@ export const ActionTypes = {
     SetGmail: "SET_GMAIL",
     SetPassword: "SET_PASSWORD",
     SetToken: "SET_TOKEN",
-    AddMenu: "ADD_MENU",
-    DeleteMenu: "DELETE_MENU"
+    SetMenu: "SET_MENU"
 }
 
 export const reducer = (state = {}, action) => {
@@ -32,16 +31,11 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 token: action.value,
             }
-        case ActionTypes.AddMenu:
+        case ActionTypes.SetMenu:
             return {
                 ...state,
-                menu: state.menu.push(action.value)
-            }
-        case ActionTypes.DeleteMenu:
-                return {
-                    ...state,
-                    menu: state.menu.filter(a => a!=action.value)
-                }
+                menu: [...state.menu, action.value],
+            };
         default:
             return state;
     }

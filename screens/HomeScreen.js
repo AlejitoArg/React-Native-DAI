@@ -10,6 +10,7 @@ const HomeScreen = ({ navigation }) => {
     const [tokenApp, onChangeToken] = React.useState("");
     const [buscarV, onChangeBuscarV] = React.useState("");
     const { contextState, setContextState } = useContextState();
+    console.log(contextState)
 
     const buscar = () =>{
         if(buscarV.length>3){
@@ -48,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
                 contextState.menu.map(
                     (plato)=>(
                         <View>
-                            <Plato nombre={plato?.title} imagen={plato?.image} desc={plato?.desc}/>
+                            <Plato nombre={plato?.nombre} imagen={plato?.imagen} desc={plato?.desc}/>
                         </View>
                     )
                 )
