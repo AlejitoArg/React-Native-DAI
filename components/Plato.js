@@ -7,11 +7,17 @@ const axios = require('axios');
 const Plato = (props) => {
     const { contextState, setContextState } = useContextState();
     const guardar = () =>{
-        setContextState({
-            type: ActionTypes.SetMenu,
-            value: contextState.menu.push(props)
-          })
-        console.log(contextState)
+        if(props.onMenu){
+            setContextState({
+                type: ActionTypes.DeleteMenu,
+                value: props
+              })
+        }else{
+            setContextState({
+                type: ActionTypes.SetMenu,
+                value: props
+              })
+        }
     }
     const styles = StyleSheet.create({
         platoImagen: {
@@ -45,13 +51,13 @@ const Plato = (props) => {
             <View style={{flex:2}}>
                 <Text style={styles.title}>{props?.nombre}</Text>
                 <Text>{props?.desc}</Text>
-                <Button
-                    onPress={guardar}
-                    title="Ver Más"
-                    color="#655ea3"
-                    style={styles.boton}
-                    accessibilityLabel="Learn more about this purple button"
-                />
+                    <Button
+                        onPress={guardar}
+                        title={props.textoBoton}
+                        color="#655ea3"
+                        style={styles.boton}
+                        accessibilityLabel="Learn more about this purple button"
+                    />
             </View>
         </View>
     );

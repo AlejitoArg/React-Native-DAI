@@ -1,7 +1,6 @@
-import { StyleSheet, View, Text, ScrollView, TextInput } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TextInput, Button } from "react-native";
 import React from "react";
 import Plato from "../components/Plato"
-import { Button } from "react-native-web";
 const axios = require('axios');
 import {useContextState } from "../contextState";
 
@@ -10,50 +9,33 @@ const HomeScreen = ({ navigation }) => {
     const [tokenApp, onChangeToken] = React.useState("");
     const [buscarV, onChangeBuscarV] = React.useState("");
     const { contextState, setContextState } = useContextState();
-    console.log(contextState)
 
     const buscar = () =>{
         if(buscarV.length>3){
-            console.log(buscarV)
             const obj = {
                     "email": "challenge@alkemy.org",
                     "password": "react"
                 }
             axios.post('http://challenge-react.alkemy.org', obj)
             .then(function (response) {
-                console.log(response.data.token);
                 onChangeToken(response.data.token)
             })
             .catch(function (error) {
-                console.log('NO SE HAN TRAIDO LOS PLATOS');
-                console.log(error);
             })
             .then(
                 axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=5fbfaca6af9949e48de98190593f70f9&query=${buscarV}`)
-                .then(function (response) {
-                    console.log(response.data.results);
-    
+                .then(function (response) {    
                     onChangePlatos(response.data.results)
                 })
                 .catch(function (error) {
-                    console.log('NO SE HAN TRAIDO LOS PLATOS');
-                    console.log(error);
                 })
             )
+        }else{
+            onChangePlatos([])
         }
     }
-    console.log(contextState)
     return (
         <ScrollView>
-            {
-                contextState.menu.map(
-                    (plato)=>(
-                        <View>
-                            <Plato nombre={plato?.nombre} imagen={plato?.imagen} desc={plato?.desc}/>
-                        </View>
-                    )
-                )
-            }
             <TextInput
                 onChangeText={onChangeBuscarV}
                 value={buscarV}
@@ -69,7 +51,17 @@ const HomeScreen = ({ navigation }) => {
                 platosApp.map(
                     (plato)=>(
                         <View>
-                            <Plato nombre={plato?.title} imagen={plato?.image} desc={plato?.desc}/>
+                            <Plato id={plato.id} nombre={plato?.title} imagen={plato?.image} desc={plato?.desc} textoBoton={"Agregar al menu"}/>
+                        </View>
+                    )
+                )
+            }
+            <Text>Menu</Text>
+            {
+                contextState.menu.map(
+                    (plato)=>(
+                        <View>
+                            <Plato id={plato.id} nombre={plato?.nombre} imagen={plato?.imagen} desc={plato?.desc} onMenu={true} textoBoton={"Eliminar del menu"}/>
                         </View>
                     )
                 )

@@ -11,7 +11,8 @@ export const ActionTypes = {
     SetGmail: "SET_GMAIL",
     SetPassword: "SET_PASSWORD",
     SetToken: "SET_TOKEN",
-    SetMenu: "SET_MENU"
+    SetMenu: "SET_MENU",
+    DeleteMenu: "DELETE_MENU"
 }
 
 export const reducer = (state = {}, action) => {
@@ -34,8 +35,14 @@ export const reducer = (state = {}, action) => {
         case ActionTypes.SetMenu:
             return {
                 ...state,
-                menu: [...state.menu, action.value],
+                menu: [...state.menu, action.value]
             };
+        case ActionTypes.DeleteMenu:
+                let newMenu = state.menu.filter(plato => plato?.id!=action.value?.id)
+                return {
+                    ...state,
+                    menu: newMenu
+                };
         default:
             return state;
     }
