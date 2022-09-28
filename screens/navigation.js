@@ -3,8 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen.js';
 import HomeScreen from './HomeScreen.js';
-import PlatosScreen from './PlatosScreen.js';
-import AgregarPlato from './AgregarPlato.js';
+import DetalleScreen from './DetalleScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,12 +20,8 @@ export default function MyStack(){
             component={HomeScreen}
         />
         <Stack.Screen
-            name="PlatosScreen"
-            component={PlatosScreen}
-        />
-        <Stack.Screen
-            name="AgregarPlato"
-            component={AgregarPlato}
+            name="Detalle"
+            component={DetalleScreen}
         />
         </Stack.Navigator>
     </NavigationContainer>

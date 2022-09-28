@@ -6,18 +6,13 @@ const axios = require('axios');
 
 const Plato = (props) => {
     const { contextState, setContextState } = useContextState();
+    const navigation = useNavigation()
     const guardar = () =>{
-        if(props.onMenu){
-            setContextState({
-                type: ActionTypes.DeleteMenu,
-                value: props
-              })
-        }else{
-            setContextState({
-                type: ActionTypes.SetMenu,
-                value: props
-              })
-        }
+        setContextState({
+            type: ActionTypes.SetPlatoSeleccionado,
+            value: props
+          })
+        navigation.navigate("Detalle")
     }
     const styles = StyleSheet.create({
         platoImagen: {
@@ -53,7 +48,7 @@ const Plato = (props) => {
                 <Text>{props?.desc}</Text>
                     <Button
                         onPress={guardar}
-                        title={props.textoBoton}
+                        title={"Ver más"}
                         color="#655ea3"
                         style={styles.boton}
                         accessibilityLabel="Learn more about this purple button"

@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 
 export const initialState = {
+    platoSeleccionado: 0,
     gmail: "",
     password: "",
     token: "",
@@ -8,6 +9,7 @@ export const initialState = {
 }
 
 export const ActionTypes = {
+    SetPlatoSeleccionado: "SET_PLATO_SELECCIONADO",
     SetGmail: "SET_GMAIL",
     SetPassword: "SET_PASSWORD",
     SetToken: "SET_TOKEN",
@@ -17,6 +19,11 @@ export const ActionTypes = {
 
 export const reducer = (state = {}, action) => {
     switch (action.type){
+        case ActionTypes.SetPlatoSeleccionado:
+            return {
+                ...state,
+                platoSeleccionado: action.value,
+            };
         case ActionTypes.SetGmail:
             return {
                 ...state,

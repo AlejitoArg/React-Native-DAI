@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
             <TextInput
                 onChangeText={onChangeBuscarV}
                 value={buscarV}
-                placeholder="Ingrese el nombre de la prenda: "
+                placeholder="Ingrese el nombre del plato: "
             />
             <Button
                 onPress={buscar}
