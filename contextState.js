@@ -5,8 +5,13 @@ export const initialState = {
     gmail: "",
     password: "",
     token: "",
-    menu: []
+    menu: [],
+    healthScore:0,
+    price:0
 }
+
+let contadorVegano=0;
+let contadorNoVegano=0;
 
 export const ActionTypes = {
     SetPlatoSeleccionado: "SET_PLATO_SELECCIONADO",
@@ -40,16 +45,46 @@ export const reducer = (state = {}, action) => {
                 token: action.value,
             }
         case ActionTypes.SetMenu:
+            console.log(action)
+            if(action.value.vegan){
+                if(contadorVegano<2){
+                    contadorVegano++
+                    return {
+                        ...state,
+                        menu: [...state.menu, action.value],
+                        price: state.price + action.value.pricePerServing,
+                        healthScore: state.healthScore + action.value.healthScore
+                    };
+                }else{
+                    console.log("No se pueden agregar mas de dos alimentos veganos")
+                }
+            }else{
+                if(contadorNoVegano<2){
+                    contadorNoVegano++
+                    return {
+                        ...state,
+                        menu: [...state.menu, action.value],
+                        price: state.price + action.value.pricePerServing,
+                        healthScore: state.healthScore + action.value.healthScore
+                    };
+                }else{
+                    console.log("No se pueden agregar mas de dos alimentos no veganos")
+                }
+            }
             return {
                 ...state,
-                menu: [...state.menu, action.value]
+                menu: [...state.menu]
             };
         case ActionTypes.DeleteMenu:
-                let newMenu = state.menu.filter(plato => plato?.id!=action.value?.id)
-                return {
-                    ...state,
-                    menu: newMenu
-                };
+            if(action.value.vegan) contadorVegano--
+            else contadorNoVegano--
+            let newMenu = state.menu.filter(plato => plato?.id!=action.value?.id)
+            return {
+                ...state,
+                menu: newMenu,
+                price: state.price - action.value.pricePerServing,
+                healthScore: state.healthScore - action.value.healthScore
+            };
         default:
             return state;
     }

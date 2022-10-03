@@ -11,12 +11,12 @@ const Detalle = ({ navigation }) => {
         if(contextState?.platoSeleccionado?.onMenu){
             setContextState({
                 type: ActionTypes.DeleteMenu,
-                value: contextState?.platoSeleccionado
+                value: plato
               })
         }else{
             setContextState({
                 type: ActionTypes.SetMenu,
-                value: contextState?.platoSeleccionado
+                value: plato
               })
         }
         navigation.navigate("Home")

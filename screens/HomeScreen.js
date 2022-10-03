@@ -51,17 +51,19 @@ const HomeScreen = ({ navigation }) => {
                 platosApp.map(
                     (plato)=>(
                         <View>
-                            <Plato id={plato.id} nombre={plato?.title} imagen={plato?.image} desc={plato?.desc} textoBoton={"Agregar al menu"}/>
+                            <Plato id={plato.id} nombre={plato?.title} imagen={plato?.image} textoBoton={"Agregar al menu"}/>
                         </View>
                     )
                 )
             }
             <Text>Menu</Text>
+            <Text>Precio total: {contextState.price}</Text>
+            <Text>HealthScore promedio: {contextState.healthScore/contextState.menu.length}</Text>
             {
                 contextState.menu.map(
                     (plato)=>(
                         <View>
-                            <Plato id={plato.id} nombre={plato?.nombre} imagen={plato?.imagen} desc={plato?.desc} onMenu={true} textoBoton={"Eliminar del menu"}/>
+                            <Plato id={plato.id} nombre={plato?.title} imagen={plato?.image} onMenu={true} textoBoton={"Eliminar del menu"}/>
                         </View>
                     )
                 )
